@@ -15,16 +15,31 @@ public class TestDesignAugmentedRCB {
 		String path = DATA_PATH; 
 
 		//specify parameters
-		// Case 1: default values 
+//		// Case 1: default values 
+//		String fieldBookName = "fieldbookAugRCB1"; 		//supply the fieldbook name specified by the user 
+//		Integer numCheck = 6;
+//		Integer numNew = 8;
+//		String trmtName = null;
+//		Integer Blk = 4; 
+//		Integer trial = 1;
+//		Integer rowPerBlk = 2;
+//		Integer numFieldRow = 4;
+//		String fieldOrder = "Serpentine";
+//		String trmtLabel = null;
+//		String checkTrmt = null; 
+//		String newTrmt = null;
+
+		// Case 1: 
 		String fieldBookName = "fieldbookAugRCB1"; 		//supply the fieldbook name specified by the user 
+
 		Integer numCheck = 6;
-		Integer numNew = 8;
+		Integer numNew = 60;
 		String trmtName = null;
 		Integer Blk = 4; 
-		Integer trial = 1;
-		Integer rowPerBlk = 2;
-		Integer numFieldRow = 4;
-		String fieldOrder = "Serpentine";
+		Integer trial = 2;
+		Integer rowPerBlk = 21;
+		Integer numFieldRow = 21;
+		String fieldOrder = "Plot Order";
 		String trmtLabel = null;
 		String checkTrmt = null; 
 		String newTrmt = null;

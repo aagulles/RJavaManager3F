@@ -573,9 +573,10 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 		//defining the R statements for randomization for augmented design in Latin Square Design
 		rscriptCommand = new StringBuilder();
 		String CSVOutput = path + fieldBookName + ".csv";
-		String TxtOuptut = path + fieldBookName + ".txt";
+		String TxtOutput = path + fieldBookName + ".txt";
+//		String LayoutOutput = path + fieldBookName;
 		
-		String sinkIn = "sink(\"" + TxtOuptut + "\")";
+		String sinkIn = "sink(\"" + TxtOutput + "\")";
 		String pkgIntro = "cat(\"Result of Randomization\\n\",date(),\"\\n\\n\\n\", sep = \"\")";
 		String funcRandomize = "result <- try(";
 		String command = "designAugmentedLSD(check = "+ repTrmt +", newTrmt = "+ unrepTrmt;
@@ -629,8 +630,20 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 			checkOutput = checkOutput + "    cat(\"\\n\",\"**Note: Cells contain plot numbers on top, treatments/entries below\")\n";
 			checkOutput = checkOutput + "}";
 			
+//			String checkOutput = "for (i in (1:length(result$layout))) {\n";
+//			checkOutput = checkOutput + "     png(filename = paste(\"" + LayoutOutput + "_Trial\",i,\".png\", sep = \"\")) \n";
+//			checkOutput = checkOutput + "     des.plot(result$layout[[i]], col = 8, new = TRUE, label = TRUE, ";
+//			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerBlk+", "+ colPerBlk +"), bwd = 4, bcol = 4, ";
+//			checkOutput = checkOutput + "     cstr = paste(\"Layout for Trial \",i,\": \\n\\nFieldCol\", sep = \"\"), rstr = \"FieldRow\")\n";
+//			checkOutput = checkOutput + "     des.plot(result$layout[[i]], col = 7, new = FALSE, label = TRUE, ";
+//			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRep+", "+ colPerRep +"), bwd = 4)\n";
+//			checkOutput = checkOutput + "     dev.off() \n";
+//			checkOutput = checkOutput + "}";
+			
 			System.out.println(checkOutput);
 			rEngine.eval(checkOutput);
+			
+			
 		}
 
 		String sinkOut = "sink()";
@@ -819,7 +832,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 		rscriptCommand = new StringBuilder();
 		String CSVOutput = path + fieldBookName + ".csv";
 		String TxtOutput = path + fieldBookName + ".txt";
-		String LayoutOutput = path + fieldBookName + ".txt";
+		String LayoutOutput = path + fieldBookName;
 		
 		String sinkIn = "sink(\"" + TxtOutput + "\")";
 		String pkgIntro = "cat(\"Result of Randomization\\n\",date(),\"\\n\\n\\n\", sep = \"\")";
@@ -877,7 +890,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 //			checkOutput = checkOutput + "}";
 			
 			Integer colPerBlk = blkSize/rowPerBlk;
-			Integer colPerRep = numTrmt/rowPerRep;
+//			Integer colPerRep = numTrmt/rowPerRep;
 			
 			String checkOutput = "for (i in (1:length(result$layout))) {\n";
 			checkOutput = checkOutput + "     png(filename = paste(\"" + LayoutOutput + "_Trial\",i,\".png\", sep = \"\")) \n";
@@ -885,13 +898,11 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerBlk+", "+ colPerBlk +"), bwd = 4, bcol = 4, ";
 			checkOutput = checkOutput + "     cstr = paste(\"Layout for Trial \",i,\": \\n\\nFieldCol\", sep = \"\"), rstr = \"FieldRow\")\n";
 			checkOutput = checkOutput + "     des.plot(result$layout[[i]], col = 7, new = FALSE, label = TRUE, ";
-			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRep+", "+ colPerRep +"), bwd = 4)\n";
+//			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRep+", "+ colPerRep +"), bwd = 4)\n";
+			checkOutput = checkOutput + "     chtdiv = 3, bwd = 4)\n";
 			checkOutput = checkOutput + "     dev.off() \n";
 			checkOutput = checkOutput + "}";
 			
-			System.out.println(checkOutput);
-			rEngine.eval(checkOutput);
-	
 			System.out.println(checkOutput);
 			rEngine.eval(checkOutput);
 		}
@@ -1335,7 +1346,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 				String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
 				String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
 				String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
-				String errorMsg4 = "cat(\"Error in designRowColumn:\\n\",msg, sep = \"\")";
+				String errorMsg4 = "cat(\"Error in designAugmentedRowColumn:\\n\",msg, sep = \"\")";
 		
 				System.out.println(errorMsg1);
 				System.out.println(errorMsg2);

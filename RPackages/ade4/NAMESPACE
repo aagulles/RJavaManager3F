@@ -1,4 +1,0 @@
-# Export all names (should be improved in the future)
-exportPattern(".")
-# load DLL
-useDynLib(ade4)
