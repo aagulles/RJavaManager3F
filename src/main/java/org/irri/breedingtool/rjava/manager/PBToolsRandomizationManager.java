@@ -890,7 +890,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 //			checkOutput = checkOutput + "}";
 			
 			Integer colPerBlk = blkSize/rowPerBlk;
-//			Integer colPerRep = numTrmt/rowPerRep;
+			Integer colPerRep = numTrmt/rowPerRep;
 			
 			String checkOutput = "for (i in (1:length(result$layout))) {\n";
 			checkOutput = checkOutput + "     png(filename = paste(\"" + LayoutOutput + "_Trial\",i,\".png\", sep = \"\")) \n";
@@ -898,8 +898,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerBlk+", "+ colPerBlk +"), bwd = 4, bcol = 4, ";
 			checkOutput = checkOutput + "     cstr = paste(\"Layout for Trial \",i,\": \\n\\nFieldCol\", sep = \"\"), rstr = \"FieldRow\")\n";
 			checkOutput = checkOutput + "     des.plot(result$layout[[i]], col = 7, new = FALSE, label = TRUE, ";
-//			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRep+", "+ colPerRep +"), bwd = 4)\n";
-			checkOutput = checkOutput + "     chtdiv = 3, bwd = 4)\n";
+			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRep+", "+ colPerRep +"), bwd = 4)\n";
 			checkOutput = checkOutput + "     dev.off() \n";
 			checkOutput = checkOutput + "}";
 			
