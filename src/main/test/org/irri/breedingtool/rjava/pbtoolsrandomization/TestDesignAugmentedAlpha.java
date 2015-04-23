@@ -20,7 +20,7 @@ public class TestDesignAugmentedAlpha {
 //		// Case 1: default values
 //		Integer numCheck = 9;
 //		Integer numNew = 6;
-//		String trmtName = "EntryNum";
+//		String trmtName = null;
 //		Integer rep = 2;
 //		Integer blkSize = 4;
 //		Integer rowPerBlk = 1;
@@ -28,7 +28,7 @@ public class TestDesignAugmentedAlpha {
 //		Integer numFieldRow = 3;
 //		Integer trial = 1;
 //		String fieldOrder = "Serpentine";//"Plot Order";
-//		String trmtLabel = "Designation";
+//		String trmtLabel = null;
 //		String checkTrmt = null;
 //		String newTrmt = null;
 		
@@ -36,7 +36,7 @@ public class TestDesignAugmentedAlpha {
 		// Case 2: demo files
 		Integer numCheck = 9;
 		Integer numNew = 63;
-		String trmtName = "EntryNum";
+		String trmtName = "EntryNo";
 		Integer blkSize = 10;
 		Integer rep = 3;
 		Integer trial = 2;
@@ -45,8 +45,8 @@ public class TestDesignAugmentedAlpha {
 		Integer numFieldRow = 15;
 		String fieldOrder = "Serpentine";
 		String trmtLabel = "Designation";
-		String checkTrmt = null;
-		String newTrmt = null;
+		String[] checkTrmt = null;
+		String[] newTrmt = null;
 		
 		RJavaManager rJavaManager= new RJavaManager();
 		rJavaManager.initPBtool();

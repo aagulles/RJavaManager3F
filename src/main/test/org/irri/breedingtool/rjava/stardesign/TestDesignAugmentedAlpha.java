@@ -28,8 +28,8 @@ public class TestDesignAugmentedAlpha {
 		Integer numFieldRow = 15;
 		String fieldOrder = "Serpentine";
 		String trmtLabel = "Designation";
-		String checkTrmt = null;
-		String newTrmt = null;
+		String[] checkTrmt = null;
+		String[] newTrmt = null;
 		
 		RJavaManager rJavaManager= new RJavaManager();
 		rJavaManager.initStar();

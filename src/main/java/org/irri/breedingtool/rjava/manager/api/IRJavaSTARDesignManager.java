@@ -214,7 +214,7 @@ public interface IRJavaSTARDesignManager {
 			Integer numCheck, Integer numNew, String trmtName, Integer blkSize,
 			Integer rep, Integer trial, Integer rowPerBlk, Integer rowPerRep,
 			Integer numFieldRow, String fieldOrder, String trmtLabel,
-			String checkTrmt, String newTrmt);
+			String[] checkTrmt, String[] newTrmt);
 
 	void doDesignPRep(String path, String fieldBookName, String[] trmtGrpName,
 			Integer[] numTrmtPerGrp, Integer[] trmtRepPerGrp, String trmtName,
@@ -230,6 +230,6 @@ public interface IRJavaSTARDesignManager {
 	void doDesignAugRCB(String path, String fieldBookName, Integer numCheck,
 			Integer numNew, String trmtName, Integer Blk, Integer trial,
 			Integer rowPerBlk, Integer numFieldRow, String fieldOrder,
-			String trmtLabel, String checkTrmt, String newTrmt);
+			String trmtLabel, String[] checkTrmt, String[] newTrmt);
 	
 }

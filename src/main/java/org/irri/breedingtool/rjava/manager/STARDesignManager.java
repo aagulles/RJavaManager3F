@@ -635,8 +635,8 @@ public class STARDesignManager implements IRJavaSTARDesignManager {
 	
 	@Override
 	public void doDesignAugRCB(String path, String fieldBookName, Integer numCheck, Integer numNew, String trmtName, Integer Blk, 
-			Integer trial, Integer rowPerBlk, Integer numFieldRow, String fieldOrder, String trmtLabel, String checkTrmt, 
-			String newTrmt){
+			Integer trial, Integer rowPerBlk, Integer numFieldRow, String fieldOrder, String trmtLabel, String[] checkTrmt, 
+			String[] newTrmt){
 
 		//defining the R statements for randomization for augmented design in Latin Square Design
 		rscriptCommand = new StringBuilder();
@@ -666,12 +666,12 @@ public class STARDesignManager implements IRJavaSTARDesignManager {
 		if (checkTrmt == null) {
 			command = command + ", checkTrmt = NULL";
 		} else {
-			command = command + ", checkTrmt = \""+ checkTrmt +"\"";
+			command = command + ", checkTrmt = "+ inputTransform.createRVector(checkTrmt) ;
 		}
 		if (newTrmt == null) {
 			command = command + ", newTrmt = NULL";
 		} else {
-			command = command + ", newTrmt = \""+ newTrmt +"\"";
+			command = command + ", newTrmt = "+ inputTransform.createRVector(newTrmt);
 		}
 		command = command + ", file = \""+ CSVOutput +"\")";
 		funcRandomize = funcRandomize + command + ", silent = TRUE)";
@@ -801,7 +801,7 @@ public class STARDesignManager implements IRJavaSTARDesignManager {
 	@Override
 	public void doDesignAugmentedAlpha(String path, String fieldBookName, Integer numCheck, Integer numNew, 
 			String trmtName, Integer blkSize, Integer rep, Integer trial, Integer rowPerBlk, Integer rowPerRep, 
-			Integer numFieldRow, String fieldOrder, String trmtLabel, String checkTrmt, String newTrmt){
+			Integer numFieldRow, String fieldOrder, String trmtLabel, String[] checkTrmt, String[] newTrmt){
 
 		//defining the R statements for randomization for Alpha Lattice
 		rscriptCommand = new StringBuilder();
@@ -832,12 +832,12 @@ public class STARDesignManager implements IRJavaSTARDesignManager {
 		if (checkTrmt == null) {
 			command = command + ", checkTrmt = NULL";
 		} else {
-			command = command + ", checkTrmt = \""+ checkTrmt +"\"";
+			command = command + ", checkTrmt = "+ inputTransform.createRVector(checkTrmt);
 		}
 		if (newTrmt == null) {
 			command = command + ", newTrmt = NULL";
 		} else {
-			command = command + ", newtrmt = \""+ newTrmt +"\"";
+			command = command + ", newtrmt = "+ inputTransform.createRVector(newTrmt);
 		}
 		command = command + ", file = \""+ CSVOutput +"\")";
 		funcRandomize = funcRandomize + command + ", silent = TRUE)";

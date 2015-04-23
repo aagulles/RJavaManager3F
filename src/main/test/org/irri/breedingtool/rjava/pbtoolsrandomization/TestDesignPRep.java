@@ -14,13 +14,13 @@ public class TestDesignPRep {
 		//supply path where the output will be saved
 		String path = DATA_PATH; 
 		//supply the fieldbook name specified by the user
-		String fieldBookName = "fieldbookPRep"; 
+		String fieldBookName = "fieldbookPRep1"; 
 		
 		//specify parameters
 		String[] trmtGrpName = {"NewRepTrmt", "NewUnrepTrmt", "Parent"};
 		Integer[] numTrmtPerGrp = {48, 80, 2};
 		Integer[] trmtRepPerGrp = {2, 1, 2};
-		String trmtName = "ENTRYNO";
+		String trmtName = "EntryNo";
 		Integer blk = 6;
 		Integer trial = 1;
 		Integer rowPerBlk = 6;

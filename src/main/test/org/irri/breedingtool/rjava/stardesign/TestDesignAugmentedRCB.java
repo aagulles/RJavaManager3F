@@ -25,8 +25,8 @@ public class TestDesignAugmentedRCB {
 		Integer numFieldRow = 14;
 		String fieldOrder = "Serpentine";
 		String trmtLabel = null;
-		String checkTrmt = null; 
-		String newTrmt = null;
+		String[] checkTrmt = null; 
+		String[] newTrmt = null;
 
 //		// Case 2: 
 //		String fieldBookName = "fieldbookAugRCB2"; 		//supply the fieldbook name specified by the user 
