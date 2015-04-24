@@ -21,18 +21,16 @@ public class TestDesignPRep {
 		Integer[] numTrmtPerGrp = {48, 80, 2};
 		Integer[] trmtRepPerGrp = {2, 1, 2};
 		String trmtName = "ENTRYNO";
-		Integer blk = 6;
 		Integer trial = 1;
-		Integer rowPerBlk = 6;
 		Integer numFieldRow = 18; 
 		String fieldOrder = "Serpentine";
 		String trmtLabel = null;
-		String trmtListPerGrp = null;
+		String[] trmtListPerGrp = null;
 		
 		RJavaManager rJavaManager= new RJavaManager();
 		rJavaManager.initStar();
 		rJavaManager.getSTARDesignManager().doDesignPRep(path, fieldBookName, trmtGrpName, numTrmtPerGrp, 
-				trmtRepPerGrp, trmtName, blk, trial, rowPerBlk, numFieldRow, fieldOrder, trmtLabel, trmtListPerGrp);
+				trmtRepPerGrp, trmtName, trial, numFieldRow, fieldOrder, trmtLabel, trmtListPerGrp);
 		
 		StringBuilder s = rJavaManager.getSTARDesignManager().getRscriptCommand();
 		System.out.println("Script Command:\n" +s.toString());

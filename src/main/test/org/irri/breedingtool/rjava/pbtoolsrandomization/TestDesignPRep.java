@@ -17,22 +17,21 @@ public class TestDesignPRep {
 		String fieldBookName = "fieldbookPRep1"; 
 		
 		//specify parameters
+		// Case 1:
 		String[] trmtGrpName = {"NewRepTrmt", "NewUnrepTrmt", "Parent"};
 		Integer[] numTrmtPerGrp = {48, 80, 2};
 		Integer[] trmtRepPerGrp = {2, 1, 2};
 		String trmtName = "EntryNo";
-		Integer blk = 6;
 		Integer trial = 1;
-		Integer rowPerBlk = 6;
 		Integer numFieldRow = 18; 
 		String fieldOrder = "Serpentine";
 		String trmtLabel = null;
-		String trmtListPerGrp = null;
+		String[] trmtListPerGrp = null;
 		
 		RJavaManager rJavaManager= new RJavaManager();
 		rJavaManager.initPBtool();
 		rJavaManager.getPbToolRandomizationManager().doDesignPRep(path, fieldBookName, trmtGrpName, numTrmtPerGrp, 
-				trmtRepPerGrp, trmtName, blk, trial, rowPerBlk, numFieldRow, fieldOrder, trmtLabel, trmtListPerGrp);
+				trmtRepPerGrp, trmtName, trial, numFieldRow, fieldOrder, trmtLabel, trmtListPerGrp);
 	}
 
 }

@@ -174,7 +174,7 @@ public interface IRJavaSTARDesignManager {
 	 */
 	
 	public void doDesignRowColumn(String path, String fieldBookName, Integer numTrmt, Integer rep, Integer trial, 
-			Integer rowPerRep, Integer numFieldRow, String fieldOrder);
+			Integer rowblkPerRep, Integer rowPerRowblk, Integer colblkPerRep, Integer numFieldRow, String fieldOrder);
 	
 	/**
 	 * calls the R statements for designAlphaLattice
@@ -218,8 +218,8 @@ public interface IRJavaSTARDesignManager {
 
 	void doDesignPRep(String path, String fieldBookName, String[] trmtGrpName,
 			Integer[] numTrmtPerGrp, Integer[] trmtRepPerGrp, String trmtName,
-			Integer blk, Integer trial, Integer rowPerBlk, Integer numFieldRow,
-			String fieldOrder, String trmtLabel, String trmtListPerGrp);
+			Integer trial, Integer numFieldRow,
+			String fieldOrder, String trmtLabel, String[] trmtListPerGrp);
 
 	void doDesignAugmentedRowColumn(String path, String fieldBookName,
 			Integer numCheck, Integer numNew, String trmtName, Integer rep,

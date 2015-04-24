@@ -917,7 +917,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 	
 	@Override
 	public void doDesignRowColumn(String path, String fieldBookName, Integer numTrmt, Integer rep, Integer trial, 
-			Integer rowPerRep, Integer numFieldRow, String fieldOrder){
+			Integer rowblkPerRep, Integer rowPerRowblk, Integer colblkPerRep, Integer numFieldRow, String fieldOrder){
 
 		//defining the R statements for randomization for Row-Column Design
 		rscriptCommand = new StringBuilder();
@@ -930,7 +930,8 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 		String funcRandomize = "result <- try(";
 		String command = "designRowColumn(list(EntryNo = c(1: "+ numTrmt +"))";
 		command = command + ", r = "+ rep +", trial = "+ trial;
-		command = command + ", rowPerRep = "+ rowPerRep +", numFieldRow = "+ numFieldRow;
+		command = command + ", rowblkPerRep = "+ rowblkPerRep +", rowPerRowblk = "+ rowPerRowblk;
+		command = command + ", colblkPerRep = "+ colblkPerRep +", numFieldRow = "+ numFieldRow;
 		if (fieldOrder == "Plot Order") {
 			command = command + ", serpentine = FALSE, file = \""+ CSVOutput +"\")";
 		} else {
@@ -975,13 +976,16 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 //			checkOutput = checkOutput + "    cat(\"\\n\",\"**Note: Cells contain plot numbers on top, treatments/entries below\")\n";
 //			checkOutput = checkOutput + "}";
 	
-			Integer colPerRep = numTrmt/rowPerRep;
+//			Integer colPerRep = numTrmt/rowPerRep;
+			Integer colPerColblk = numTrmt/(rowblkPerRep*rowPerRowblk*colblkPerRep);
 			
 			String checkOutput = "for (i in (1:length(result$layout))) {\n";
 			checkOutput = checkOutput + "     png(filename = paste(\"" + LayoutOutput + "_Trial\",i,\".png\", sep = \"\")) \n";
 			checkOutput = checkOutput + "     des.plot(result$layout[[i]], col = 8, new = TRUE, label = TRUE, ";
-			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRep+", "+ colPerRep +"), bwd = 4, bcol = 4, ";
+			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowPerRowblk +", "+ colPerColblk +"), bwd = 4, bcol = 4, ";
 			checkOutput = checkOutput + "     cstr = paste(\"Layout for Trial \",i,\": \\n\\nFieldCol\", sep = \"\"), rstr = \"FieldRow\")\n";
+			checkOutput = checkOutput + "     des.plot(result$layout[[i]], col = 8, new = FALSE, label = TRUE, ";
+			checkOutput = checkOutput + "     chtdiv = 3, bdef = cbind("+ rowblkPerRep*rowPerRowblk +", "+ colblkPerRep*colPerColblk +"), bwd = 4)\n";
 			checkOutput = checkOutput + "     dev.off() \n";
 			checkOutput = checkOutput + "}";
 			
@@ -1382,8 +1386,8 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 
 	@Override
 		public void doDesignPRep(String path, String fieldBookName, String[] trmtGrpName, Integer[] numTrmtPerGrp, 
-				Integer[] trmtRepPerGrp, String trmtName, Integer blk, Integer trial, Integer rowPerBlk, Integer numFieldRow, 
-				String fieldOrder, String trmtLabel, String trmtListPerGrp){
+				Integer[] trmtRepPerGrp, String trmtName, Integer trial, Integer numFieldRow, 
+				String fieldOrder, String trmtLabel, String[] trmtListPerGrp){
 		
 			//defining the R statements for randomization for Alpha Lattice
 			rscriptCommand = new StringBuilder();
@@ -1395,8 +1399,8 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 			String funcRandomize = "result <- try(";
 			String command = "designPRep(trmtPerGrp = "+ inputTransform.createRList(trmtGrpName, numTrmtPerGrp);
 			command = command + ", trmtRepPerGrp = "+ inputTransform.createRNumVector(trmtRepPerGrp);
-			command = command + ", trmtName = \""+ trmtName  +"\", blk = "+ blk +", trial = "+ trial;
-			command = command + ", rowPerBlk = "+ rowPerBlk +", numFieldRow = "+ numFieldRow;
+			command = command + ", trmtName = \""+ trmtName  +"\", trial = "+ trial;
+			command = command + ", numFieldRow = "+ numFieldRow;
 			if (fieldOrder == "Plot Order") {
 				command = command + ", serpentine = FALSE";
 			} else {
@@ -1410,7 +1414,7 @@ public class PBToolsRandomizationManager implements IRJavaSTARDesignManager {
 			if (trmtListPerGrp == null) {
 				command = command + ", trmtListPerGrp = NULL";
 			} else {
-				command = command + ", trmtListPerGrp = \""+ trmtListPerGrp + "\"";
+				command = command + ", trmtListPerGrp = "+ inputTransform.createRVector(trmtListPerGrp);
 			}
 			
 			command = command + ", file = \""+ CSVOutput +"\")";

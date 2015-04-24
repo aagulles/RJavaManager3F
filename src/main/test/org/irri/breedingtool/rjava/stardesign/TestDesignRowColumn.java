@@ -17,17 +17,30 @@ public class TestDesignRowColumn {
 		String fieldBookName = "fieldbookRowColumn"; 
 		
 		//specify parameters
-		Integer numTrmt = 20;
-		Integer rep = 2;
-		Integer rowPerRep = 10;
-		Integer numFieldRow = 10;
+//		// Case1: default values
+//		Integer numTrmt = 9;
+//		Integer rep = 2;
+//		Integer trial = 1;
+//		Integer rowblkPerRep = 3;
+//		Integer rowPerRowblk = 1;
+//		Integer colblkPerRep = 3;
+//		Integer numFieldRow = 3;
+//		String fieldOrder = "Serpentine";
+		
+		// Case2: 2 rows per row block and 2 col per column block
+		Integer numTrmt = 36;
+		Integer rep = 3;
 		Integer trial = 1;
+		Integer rowblkPerRep = 3;
+		Integer rowPerRowblk = 2;
+		Integer colblkPerRep = 3;
+		Integer numFieldRow = 18;
 		String fieldOrder = "Serpentine";
 		
 		RJavaManager rJavaManager= new RJavaManager();
 		rJavaManager.initStar();
 		rJavaManager.getSTARDesignManager().doDesignRowColumn(path, fieldBookName, numTrmt, 
-				rep, trial, rowPerRep, numFieldRow, fieldOrder);
+				rep, trial, rowblkPerRep, rowPerRowblk, colblkPerRep, numFieldRow, fieldOrder);
 		
 		StringBuilder s = rJavaManager.getSTARDesignManager().getRscriptCommand();
 		System.out.println("Script Command:\n" +s.toString());
