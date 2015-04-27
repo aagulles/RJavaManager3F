@@ -3831,8 +3831,10 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 								String outAnovaTable3 = "model1b <- lmer(formula(ssa1$output[[" + i + "]]$site[[" + j + "]]$formula1), data = ssa1$output[[" + i + "]]$site[[" + j + "]]$data, REML = T)";
 								String outAnovaTable4 = "a.table <- anova(model1b)";
 								String outAnovaTable5 = "pvalue <- formatC(as.numeric(format(a.table[1,6], scientific=FALSE)), format=\"f\")";
-								String outAnovaTable6 = "a.table<-cbind(round(a.table[,1:5], digits=4),pvalue)";
-								String outAnovaTable7 = "colnames(a.table)<-c(\"Df\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Denom\", \"Pr(>F)\")";
+								//String outAnovaTable6 = "a.table<-cbind(round(a.table[,1:5], digits=4),pvalue)";
+								String outAnovaTable6 = "a.table<-cbind(round(a.table[,c(3,4,1:2,5)], digits=4),pvalue)";
+								//String outAnovaTable7 = "colnames(a.table)<-c(\"NumDf\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Denom\", \"Pr(>F)\")";
+								String outAnovaTable7 = "colnames(a.table)<-c(\"NumDf\", \"DenDf\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Pr(>F)\")";
 								String outAnovaTable8 = "capture.output(cat(\"Analysis of Variance Table with Satterthwaite Denominator Df\n\"),file=\"" + outFileName + "\",append = TRUE)";
 								String outAnovaTable9 = "capture.output(a.table,file=\"" + outFileName + "\",append = TRUE)";
 								String outAnovaTable10 = "detach(\"package:lmerTest\")";
@@ -4314,10 +4316,17 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 							String outTestGen1 = "capture.output(cat(\"\nTESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outTestGen2 = "capture.output(cat(\"\nFormula for Model1: \", ssa2$output[["	+ i	+ "]]$site[[" + j + "]]$formula1,\"\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outTestGen3 = "capture.output(cat(\"Formula for Model2: \", ssa2$output[["	+ i	+ "]]$site[[" + j + "]]$formula2,\"\n\n\"),file=\"" + outFileName + "\",append = TRUE)";
-							String outTestGen4 = "capture.output(ssa2$output[[" + i + "]]$site[[" + j + "]]$models.table,file=\"" + outFileName + "\",append = TRUE)";
+							//String outTestGen4 = "capture.output(ssa2$output[[" + i + "]]$site[[" + j + "]]$models.table,file=\"" + outFileName + "\",append = TRUE)";
+							String outTestGen4a = "compareModelTable <- data.frame(rownames(ssa2$output[[" + i + "]]$site[[" + j + "]]$models.table), ssa2$output[[" + i + "]]$site[[" + j + "]]$models.table)";
+							String outTestGen4b = "colnames(compareModelTable) <- c(\"\",colnames(ssa2$output[[" + i + "]]$site[[" + j + "]]$models.table))";
+							String outTestGen4 = "capture.output(printDataFrame(compareModelTable, border = FALSE), file=\"" + outFileName + "\",append = TRUE)";
 							rEngine.eval(outTestGen1);
 							rEngine.eval(outTestGen2);
 							rEngine.eval(outTestGen3);
+							System.out.println(outTestGen4a);
+							System.out.println(outTestGen4b);
+							rEngine.eval(outTestGen4a);
+							rEngine.eval(outTestGen4b);
 							rEngine.eval(outTestGen4);
 							rEngine.eval(outspace);
 							
@@ -4331,8 +4340,10 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 								String outAnovaTable3 = "model2b <- lmer(formula(ssa2$output[[" + i + "]]$site[[" + j + "]]$formula1), data = ssa2$output[[" + i + "]]$site[[" + j + "]]$data, REML = T)";
 								String outAnovaTable4 = "a.table <- anova(model2b)";
 								String outAnovaTable5 = "pvalue <- formatC(as.numeric(format(a.table[1,6], scientific=FALSE)), format=\"f\")";
-								String outAnovaTable6 = "a.table<-cbind(round(a.table[,1:5], digits=4),pvalue)";
-								String outAnovaTable7 = "colnames(a.table)<-c(\"Df\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Denom\", \"Pr(>F)\")";
+								//String outAnovaTable6 = "a.table<-cbind(round(a.table[,1:5], digits=4),pvalue)";
+								String outAnovaTable6 = "a.table<-cbind(round(a.table[,c(3,4,1:2,5)], digits=4),pvalue)";
+								//String outAnovaTable7 = "colnames(a.table)<-c(\"NumDf\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Denom\", \"Pr(>F)\")";
+								String outAnovaTable7 = "colnames(a.table)<-c(\"NumDf\", \"DenDf\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Pr(>F)\")";
 								String outAnovaTable8 = "capture.output(cat(\"Analysis of Variance Table with Satterthwaite Denominator Df\n\"),file=\"" + outFileName + "\",append = TRUE)";
 								String outAnovaTable9 = "capture.output(a.table,file=\"" + outFileName + "\",append = TRUE)";
 								String outAnovaTable10 = "detach(\"package:lmerTest\")";
