@@ -24,7 +24,7 @@ public class TestDesignAugmentedLSD {
 		String fieldOrder = "Serpentine";
 		
 		RJavaManager rJavaManager= new RJavaManager();
-		rJavaManager.initStar();
+		rJavaManager.initPBtool();
 		rJavaManager.getPbToolRandomizationManager().doDesignAugLSD(path, fieldBookName, repTrmt, unrepTrmt, fieldRow, 
 				trial, fieldOrder);
 		

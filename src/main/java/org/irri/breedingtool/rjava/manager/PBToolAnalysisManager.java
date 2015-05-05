@@ -5253,8 +5253,10 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 							String outAnovaTable3 = "model1b <- lmer(formula(meaOne1$output[[" + i + "]]$formula1), data = meaOne1$output[[" + i + "]]$data, REML = T)";
 							String outAnovaTable4 = "a.table <- anova(model1b)";
 							String outAnovaTable5 = "pvalue <- formatC(as.numeric(format(a.table[1,6], scientific=FALSE)), format=\"f\")";
-							String outAnovaTable6 = "a.table<-cbind(round(a.table[,1:5], digits=4),pvalue)";
-							String outAnovaTable7 = "colnames(a.table)<-c(\"Df\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Denom\", \"Pr(>F)\")";
+//							String outAnovaTable6 = "a.table<-cbind(round(a.table[,1:5], digits=4),pvalue)";
+							String outAnovaTable6 = "a.table<-cbind(round(a.table[,c(3,4,1,2,5)], digits=4),pvalue)";
+//							String outAnovaTable7 = "colnames(a.table)<-c(\"Df\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Denom\", \"Pr(>F)\")";
+							String outAnovaTable7 = "colnames(a.table)<-c(\"NumDf\", \"DenDF\", \"Sum Sq\", \"Mean Sq\", \"F value\", \"Pr(>F)\")";
 							String outAnovaTable8 = "capture.output(cat(\"Analysis of Variance Table with Satterthwaite Denominator Df\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outAnovaTable9 = "capture.output(a.table,file=\"" + outFileName + "\",append = TRUE)";
 							String outAnovaTable10 = "detach(\"package:lmerTest\")";
@@ -5277,10 +5279,15 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 							String outTestEnv1 = "capture.output(cat(\"\nTESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outTestEnv2 = "capture.output(cat(\"\nFormula for Model1: \", meaOne1$output[[" + i + "]]$formula1,\"\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outTestEnv3 = "capture.output(cat(\"Formula for Model2: \", meaOne1$output[[" + i + "]]$formula3,\"\n\n\"),file=\"" + outFileName + "\",append = TRUE)";
-							String outTestEnv4 = "capture.output(meaOne1$output[[" + i + "]]$testsig.Env,file=\"" + outFileName + "\",append = TRUE)";
+							String outTestEnv4a = "testsigEnv <- data.frame(rownames(meaOne1$output[[" + i + "]]$testsig.Env), meaOne1$output[[" + i + "]]$testsig.Env)";
+							String outTestEnv4b = "colnames(testsigEnv) <- c(\"\", colnames(meaOne1$output[[" + i + "]]$testsig.Env))";
+//							String outTestEnv4 = "capture.output(meaOne1$output[[" + i + "]]$testsig.Env,file=\"" + outFileName + "\",append = TRUE)";
+							String outTestEnv4 = "capture.output(printDataFrame(testsigEnv, border = FALSE), file=\"" + outFileName + "\",append = TRUE)";
 							rEngine.eval(outTestEnv1);
 							rEngine.eval(outTestEnv2);
 							rEngine.eval(outTestEnv3);
+							rEngine.eval(outTestEnv4a);
+							rEngine.eval(outTestEnv4b);
 							rEngine.eval(outTestEnv4);
 							rEngine.eval(outSpace);
 							
@@ -5288,10 +5295,15 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 							String outTestGenoEnv1 = "capture.output(cat(\"\nTESTING FOR THE SIGNIFICANCE OF GENOTYPE X ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outTestGenoEnv2 = "capture.output(cat(\"\nFormula for Model1: \", meaOne1$output[[" + i + "]]$formula1,\"\n\"),file=\"" + outFileName + "\",append = TRUE)";
 							String outTestGenoEnv3 = "capture.output(cat(\"Formula for Model2: \", meaOne1$output[[" + i + "]]$formula4,\"\n\n\"),file=\"" + outFileName + "\",append = TRUE)";
-							String outTestGenoEnv4 = "capture.output(meaOne1$output[[" + i + "]]$testsig.GenoEnv,file=\"" + outFileName + "\",append = TRUE)";
+							String outTestGenoEnv4a = "testsigGE <- data.frame(rownames(meaOne1$output[[" + i + "]]$testsig.GenoEnv), meaOne1$output[[" + i + "]]$testsig.GenoEnv)";
+							String outTestGenoEnv4b = "colnames(testsigGE) <- c(\"\", colnames(meaOne1$output[[" + i + "]]$testsig.GenoEnv))";
+//							String outTestGenoEnv4 = "capture.output(meaOne1$output[[" + i + "]]$testsig.GenoEnv,file=\"" + outFileName + "\",append = TRUE)";
+							String outTestGenoEnv4 = "capture.output(printDataFrame(testsigGE, border = FALSE), file=\"" + outFileName + "\",append = TRUE)";
 							rEngine.eval(outTestGenoEnv1);
 							rEngine.eval(outTestGenoEnv2);
 							rEngine.eval(outTestGenoEnv3);
+							rEngine.eval(outTestGenoEnv4a);
+							rEngine.eval(outTestGenoEnv4b);
 							rEngine.eval(outTestGenoEnv4);
 							rEngine.eval(outSpace);
 							
@@ -5866,10 +5878,15 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 						String outTestGeno1 = "capture.output(cat(\"\nTESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:\n\"),file=\"" + outFileName + "\",append = TRUE)";
 						String outTestGeno2 = "capture.output(cat(\"\nFormula for Model1: \", meaOne2$output[[" + i + "]]$formula1,\"\n\"),file=\"" + outFileName + "\",append = TRUE)";
 						String outTestGeno3 = "capture.output(cat(\"Formula for Model2: \", meaOne2$output[[" + i + "]]$formula2,\"\n\n\"),file=\"" + outFileName + "\",append = TRUE)";
-						String outTestGeno4 = "capture.output(meaOne2$output[[" + i + "]]$testsig.Geno,file=\"" + outFileName + "\",append = TRUE)";
+						String outTestGeno4a = "testsigGeno <- data.frame(rownames(meaOne2$output[[" + i + "]]$testsig.Geno), meaOne2$output[[" + i + "]]$testsig.Geno)";
+						String outTestGeno4b = "colnames(testsigGeno) <- c(\"\", colnames(meaOne2$output[[" + i + "]]$testsig.Geno))";
+//						String outTestGeno4 = "capture.output(meaOne2$output[[" + i + "]]$testsig.Geno,file=\"" + outFileName + "\",append = TRUE)";
+						String outTestGeno4 = "capture.output(printDataFrame(testsigGeno, border = FALSE), file=\"" + outFileName + "\",append = TRUE)";
 						rEngine.eval(outTestGeno1);
 						rEngine.eval(outTestGeno2);
 						rEngine.eval(outTestGeno3);
+						rEngine.eval(outTestGeno4a);
+						rEngine.eval(outTestGeno4b);
 						rEngine.eval(outTestGeno4);
 						rEngine.eval(outSpace);
 						
@@ -5877,10 +5894,15 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 						String outTestEnv1 = "capture.output(cat(\"\nTESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:\n\"),file=\"" + outFileName + "\",append = TRUE)";
 						String outTestEnv2 = "capture.output(cat(\"\nFormula for Model1: \", meaOne2$output[[" + i + "]]$formula1,\"\n\"),file=\"" + outFileName + "\",append = TRUE)";
 						String outTestEnv3 = "capture.output(cat(\"Formula for Model2: \", meaOne2$output[[" + i + "]]$formula3,\"\n\n\"),file=\"" + outFileName + "\",append = TRUE)";
-						String outTestEnv4 = "capture.output(meaOne2$output[[" + i + "]]$testsig.Env,file=\"" + outFileName + "\",append = TRUE)";
+//						String outTestEnv4 = "capture.output(meaOne2$output[[" + i + "]]$testsig.Env,file=\"" + outFileName + "\",append = TRUE)";
+						String outTestEnv4a = "testsigEnv <- data.frame(rownames(meaOne2$output[[" + i + "]]$testsig.Env), meaOne2$output[[" + i + "]]$testsig.Env)";
+						String outTestEnv4b = "colnames(testsigEnv) <- c(\"\", colnames(meaOne2$output[[" + i + "]]$testsig.Env))";
+						String outTestEnv4 = "capture.output(printDataFrame(testsigEnv, border = FALSE), file=\"" + outFileName + "\",append = TRUE)";
 						rEngine.eval(outTestEnv1);
 						rEngine.eval(outTestEnv2);
 						rEngine.eval(outTestEnv3);
+						rEngine.eval(outTestEnv4a);
+						rEngine.eval(outTestEnv4b);
 						rEngine.eval(outTestEnv4);
 						rEngine.eval(outSpace);
 						
@@ -5888,10 +5910,16 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 						String outTestGenoEnv1 = "capture.output(cat(\"\nTESTING FOR THE SIGNIFICANCE OF GENOTYPE X ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:\n\"),file=\"" + outFileName + "\",append = TRUE)";
 						String outTestGenoEnv2 = "capture.output(cat(\"\nFormula for Model1: \", meaOne2$output[[" + i + "]]$formula1,\"\n\"),file=\"" + outFileName + "\",append = TRUE)";
 						String outTestGenoEnv3 = "capture.output(cat(\"Formula for Model2: \", meaOne2$output[[" + i + "]]$formula4,\"\n\n\"),file=\"" + outFileName + "\",append = TRUE)";
-						String outTestGenoEnv4 = "capture.output(meaOne2$output[[" + i + "]]$testsig.GenoEnv,file=\"" + outFileName + "\",append = TRUE)";
+//						String outTestGenoEnv4 = "capture.output(meaOne2$output[[" + i + "]]$testsig.GenoEnv,file=\"" + outFileName + "\",append = TRUE)";
+						String outTestGenoEnv4a = "testsigGenoEnv <- data.frame(rownames(meaOne2$output[[" + i + "]]$testsig.GenoEnv), meaOne2$output[[" + i + "]]$testsig.GenoEnv)";
+						String outTestGenoEnv4b = "colnames(testsigGenoEnv) <- c(\"\", colnames(meaOne2$output[[" + i + "]]$testsig.Env))";
+						String outTestGenoEnv4 = "capture.output(printDataFrame(testsigGenoEnv, border = FALSE), file=\"" + outFileName + "\",append = TRUE)";
+
 						rEngine.eval(outTestGenoEnv1);
 						rEngine.eval(outTestGenoEnv2);
 						rEngine.eval(outTestGenoEnv3);
+						rEngine.eval(outTestGenoEnv4a);
+						rEngine.eval(outTestGenoEnv4b);
 						rEngine.eval(outTestGenoEnv4);
 						rEngine.eval(outSpace);
 						
@@ -12187,7 +12215,8 @@ public class PBToolAnalysisManager implements IRJavaPBToolsAnalysisManager {
 			if (environment != null) {
 				command1 = command1 + ", env = \"" + environment +"\"";
 			} else { 
-				command1 = command1 + ", env = " + String.valueOf(environment).toUpperCase();
+				//command1 = command1 + ", env = " + String.valueOf(environment).toUpperCase();
+				command1 = command1 + ", env = NULL";
 			}
 			
 			String command2;

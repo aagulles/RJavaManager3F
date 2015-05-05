@@ -46,9 +46,10 @@ public class TestMultiEnvironmentFirstStage2 {
 		
 		RJavaManager rJavaManager= new RJavaManager();
 		rJavaManager.initPBtool();
-		rJavaManager.getPbToolAnalysisManager().doMultiEnvironmentOneStage(dataFileName, outFileName, resultFolderPath, designIndex, respvar, environment, environmentLevels,
-				genotype, block, rep, row, column, descriptiveStat, varianceComponents, boxplotRawData, histogramRawData, diagnosticPlot, 
-				genotypeFixed, performPairwise, pairwiseAlpha, genotypeLevels, controlLevels, compareControl, performAllPairwise, genotypeRandom);
+		rJavaManager.getPbToolAnalysisManager().doMultiEnvironmentOneStage(dataFileName, outFileName, resultFolderPath, designIndex,
+				respvar, environment, environmentLevels, genotype, block, rep, row, column, descriptiveStat, varianceComponents, 
+				boxplotRawData, histogramRawData, diagnosticPlot, genotypeFixed, performPairwise, pairwiseAlpha, genotypeLevels, 
+				controlLevels, compareControl, performAllPairwise, genotypeRandom);
 	}
 
 }

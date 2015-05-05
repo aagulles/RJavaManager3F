@@ -27,14 +27,24 @@ public class TestDesignRowColumn {
 //		Integer numFieldRow = 3;
 //		String fieldOrder = "Serpentine";
 		
+//		// Case2: 2 rows per row block and 2 col per column block
+//		Integer numTrmt = 36;
+//		Integer rep = 3;
+//		Integer trial = 1;
+//		Integer rowblkPerRep = 3;
+//		Integer rowPerRowblk = 2;
+//		Integer colblkPerRep = 3;
+//		Integer numFieldRow = 18;
+//		String fieldOrder = "Serpentine";
+		
 		// Case2: 2 rows per row block and 2 col per column block
-		Integer numTrmt = 36;
-		Integer rep = 3;
+		Integer numTrmt = 250;
+		Integer rep = 4;
 		Integer trial = 1;
-		Integer rowblkPerRep = 3;
-		Integer rowPerRowblk = 2;
-		Integer colblkPerRep = 3;
-		Integer numFieldRow = 18;
+		Integer rowblkPerRep = 2;
+		Integer rowPerRowblk = 1;
+		Integer colblkPerRep = 125;
+		Integer numFieldRow = 8;
 		String fieldOrder = "Serpentine";
 		
 		RJavaManager rJavaManager= new RJavaManager();
