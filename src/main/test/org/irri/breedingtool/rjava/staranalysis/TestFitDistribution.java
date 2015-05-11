@@ -13,18 +13,18 @@ public class TestFitDistribution {
 	public static void main(String[] args) {
 		
 		//supply path and name of active data
-		String dataFileName = DATA_PATH + "beta.csv";
-		String yVar = "Y"; 
-		String byVar = null; //"TPL"; //
-		String[] distrib = {"beta", "lnorm"}; //gamma"}; //{"norm"}; //
-		String fitMethod = "mle";
+//		String dataFileName = DATA_PATH + "beta.csv";
+//		String yVar = "Y"; 
+//		String byVar = null; //"TPL"; //
+//		String[] distrib = {"beta", "lnorm"}; //gamma"}; //{"norm"}; //
+//		String fitMethod = "mle";
 
 		//TEST 1
-//		String dataFileName = DATA_PATH + "Gerua.csv";
-//		String yVar = "GRNYLD"; 
-//		String byVar = null; //"TPL"; //
-//		String[] distrib = {"norm", "lnorm"}; //gamma"}; //{"norm"}; //
-//		String fitMethod = "mle";
+		String dataFileName = DATA_PATH + "Gerua.csv";
+		String yVar = "GRNYLD"; 
+		String byVar = null; //"TPL"; //
+		String[] distrib = {"norm", "lnorm"}; //gamma"}; //{"norm"}; //
+		String fitMethod = "mle";
 
 ////		TEST 2
 //		String dataFileName = DATA_PATH + "Gerua.csv";
