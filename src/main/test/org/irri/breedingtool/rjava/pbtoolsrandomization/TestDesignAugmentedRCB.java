@@ -75,16 +75,31 @@ public class TestDesignAugmentedRCB {
 //		String[] checkTrmt = null; 
 //		String[] newTrmt = null;
 		
+//		// Case 5: test for B4Rice 
+//		String fieldBookName = "fieldbookAugRCB5"; 		//supply the fieldbook name specified by the user 
+//		//specify parameters
+//		Integer numCheck = 5;
+//		Integer numNew = 702;
+//		String trmtName = "EntryNum";
+//		Integer Blk = 6; 
+//		Integer trial = 1;
+//		Integer rowPerBlk = 122;
+//		Integer numFieldRow = 122;
+//		String fieldOrder = "Serpentine";
+//		String trmtLabel = null;
+//		String[] checkTrmt = null; 
+//		String[] newTrmt = null;
+		
 		// Case 5: test for B4Rice 
-		String fieldBookName = "fieldbookAugRCB5"; 		//supply the fieldbook name specified by the user 
+		String fieldBookName = "fieldbookAugRCB6"; 		//supply the fieldbook name specified by the user 
 		//specify parameters
-		Integer numCheck = 5;
-		Integer numNew = 702;
+		Integer numCheck = 2;
+		Integer numNew = 4;
 		String trmtName = "EntryNum";
-		Integer Blk = 6; 
+		Integer Blk = 2; 
 		Integer trial = 1;
-		Integer rowPerBlk = 122;
-		Integer numFieldRow = 122;
+		Integer rowPerBlk = 4;
+		Integer numFieldRow = 8;
 		String fieldOrder = "Serpentine";
 		String trmtLabel = null;
 		String[] checkTrmt = null; 
